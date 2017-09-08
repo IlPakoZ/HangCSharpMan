@@ -20,7 +20,7 @@ namespace hangMan
         public Main()
         {
             InitializeComponent();
-            s = new stickMan(6); //initiate stickMan instance with 6 life
+            s = new stickMan(6); //initiate stickMan instance with 6 lives
             genWord();
         }
 
