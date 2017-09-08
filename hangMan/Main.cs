@@ -12,14 +12,15 @@ namespace hangMan
 {
     public partial class Main : Form
     {
-        stickMan s;
+        stickMan s; 
         int wordComplexity;
         List<TextBox> word;
-        String tempWord = "cacca";
+        String tempWord = "cacca"; //that rude
+        
         public Main()
         {
             InitializeComponent();
-            s = new stickMan(6);
+            s = new stickMan(6); //initiate stickMan instance with 6 life
             genWord();
         }
 
