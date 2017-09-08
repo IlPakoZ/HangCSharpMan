@@ -1,0 +1,10 @@
+C:\Users\utente\source\repos\hangMan\hangMan\bin\Debug\hangMan.exe.config
+C:\Users\utente\source\repos\hangMan\hangMan\bin\Debug\hangMan.exe
+C:\Users\utente\source\repos\hangMan\hangMan\bin\Debug\hangMan.pdb
+C:\Users\utente\source\repos\hangMan\hangMan\obj\Debug\hangMan.csprojResolveAssemblyReference.cache
+C:\Users\utente\source\repos\hangMan\hangMan\obj\Debug\hangMan.Properties.Resources.resources
+C:\Users\utente\source\repos\hangMan\hangMan\obj\Debug\hangMan.csproj.GenerateResource.Cache
+C:\Users\utente\source\repos\hangMan\hangMan\obj\Debug\hangMan.csproj.CoreCompileInputs.cache
+C:\Users\utente\source\repos\hangMan\hangMan\obj\Debug\hangMan.exe
+C:\Users\utente\source\repos\hangMan\hangMan\obj\Debug\hangMan.pdb
+C:\Users\utente\source\repos\hangMan\hangMan\obj\Debug\hangMan.Main.resources
