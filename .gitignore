@@ -13,12 +13,9 @@
 
 #dir 
 #this is shit geez
-/.vs/
-/hangMan/bin/
-/hangMan/obj/
-/.vs/*
-/hangMan/bin/*
-/hangMan/obj/*
+.vs/
+bin/
+obj/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
