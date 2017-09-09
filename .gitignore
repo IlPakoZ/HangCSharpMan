@@ -11,11 +11,14 @@
 *.ide
 
 
-#dir
+#dir 
+#this is shit geez
 /.vs/
 /hangMan/bin/
 /hangMan/obj/
-
+/.vs/*
+/hangMan/bin/*
+/hangMan/obj/*
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
