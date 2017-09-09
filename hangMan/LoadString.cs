@@ -9,18 +9,24 @@ namespace hangMan
 {
     static class LoadString
     {
-        private static String[] word;
+        private static String[] a_words; //List of all the words acquired from the file.
+
+        /// <summary>
+        /// This method returns all the words from the text file situated at the path passed by parameter.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static String[] loadFile(String path)
         {
             try
             {
-                word = File.ReadAllLines(path);
+                a_words = File.ReadAllLines(path);
             }
             catch (FileNotFoundException)
             {
                 return new String[] { "File not found" };
             }
-            return word;
+            return a_words;
         }
 
     }
