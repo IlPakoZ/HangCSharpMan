@@ -1,6 +1,6 @@
 ﻿namespace hangMan
 {
-    partial class Main
+    partial class frm_Main
     {
         /// <summary>
         /// Required designer variable.
@@ -28,50 +28,50 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.backGround = new System.Windows.Forms.PictureBox();
-            this.check = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.backGround)).BeginInit();
+            this.pb_BackGround = new System.Windows.Forms.PictureBox();
+            this.btn_Check = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_BackGround)).BeginInit();
             this.SuspendLayout();
             // 
-            // backGround
+            // pb_BackGround
             // 
-            this.backGround.BackColor = System.Drawing.Color.White;
-            this.backGround.Location = new System.Drawing.Point(172, 12);
-            this.backGround.Name = "backGround";
-            this.backGround.Size = new System.Drawing.Size(100, 237);
-            this.backGround.TabIndex = 0;
-            this.backGround.TabStop = false;
-            this.backGround.Paint += new System.Windows.Forms.PaintEventHandler(this.backGround_Paint);
+            this.pb_BackGround.BackColor = System.Drawing.Color.White;
+            this.pb_BackGround.Location = new System.Drawing.Point(172, 12);
+            this.pb_BackGround.Name = "pb_BackGround";
+            this.pb_BackGround.Size = new System.Drawing.Size(100, 237);
+            this.pb_BackGround.TabIndex = 0;
+            this.pb_BackGround.TabStop = false;
+            this.pb_BackGround.Paint += new System.Windows.Forms.PaintEventHandler(this.backGround_Paint);
             // 
-            // check
+            // btn_Check
             // 
-            this.check.Location = new System.Drawing.Point(47, 189);
-            this.check.Name = "check";
-            this.check.Size = new System.Drawing.Size(75, 23);
-            this.check.TabIndex = 1;
-            this.check.Text = "Controlla";
-            this.check.UseVisualStyleBackColor = true;
-            this.check.Click += new System.EventHandler(this.check_Click);
+            this.btn_Check.Location = new System.Drawing.Point(47, 189);
+            this.btn_Check.Name = "btn_Check";
+            this.btn_Check.Size = new System.Drawing.Size(75, 23);
+            this.btn_Check.TabIndex = 1;
+            this.btn_Check.Text = "Controlla";
+            this.btn_Check.UseVisualStyleBackColor = true;
+            this.btn_Check.Click += new System.EventHandler(this.check_Click);
             // 
-            // Main
+            // frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.check);
-            this.Controls.Add(this.backGround);
+            this.Controls.Add(this.btn_Check);
+            this.Controls.Add(this.pb_BackGround);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "Main";
+            this.Name = "frm_Main";
             this.ShowIcon = false;
             this.Load += new System.EventHandler(this.Main_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.backGround)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_BackGround)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PictureBox backGround;
-        private System.Windows.Forms.Button check;
+        private System.Windows.Forms.PictureBox pb_BackGround;
+        private System.Windows.Forms.Button btn_Check;
     }
 }

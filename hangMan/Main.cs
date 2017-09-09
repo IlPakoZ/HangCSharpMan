@@ -11,171 +11,227 @@ using System.Windows.Forms;
 
 namespace hangMan
 {
-    public partial class Main : Form
+    public partial class frm_Main : Form
     {
-        stickMan s;
-        int wordComplexity;
-        List<TextBox> word;
-        String parola;
-        public Main()
+        //This region contains the variables declaration and the constructor.
+        #region BaseThing
+
+        // Declaration ---------------------------------------------------------------------------------
+        stickMan sm_MainStick; //Creates a new stickman! 
+        int wordComplexity; //Indicates the complexity of the word, aka the number of its characters.
+        List<TextBox> l_words; //Creates a list containing textboxes.
+        String wordToGuess; //Word to guess.
+        // ---------------------------------------------------------------------------------------------
+
+        /// <summary>
+        /// Main class constructor
+        /// </summary>
+        public frm_Main()
         {
             InitializeComponent();
-            s = new stickMan(6);
-            genWord();
-            randString();
+            sm_MainStick = new stickMan(6); //initiate stickMan instance with 6 lives
+                                 //This type of instantiation is quite useless, the stickman can have only 6 lives, passing them by parameter has no sense.
+            genWord(); //Calls the method that generates a word.   
+            randString(); //Calls the method that selects a random string from the file.
         }
+        #endregion
 
+        //This region contains all the event handling methods.
+        #region EventHandling
+
+        /// <summary>
+        /// Main_Load event handler.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Main_Load(object sender, EventArgs e)
         {
-            initText();
+            initText(); //Initializes the  default textboxes.
         }
 
+        /// <summary>
+        /// backGround_Paint event handler (paints the background of the Hangman's reserved picturebox).
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void backGround_Paint(object sender, PaintEventArgs e)
         {
-            Graphics g = e.Graphics;
-            switch (s.lives)
+            Graphics g_bg = e.Graphics;
+
+            //This region contains all the drawing operations regarding the hangman's parts in a switch case statement.
+            #region Lifes switch
+            switch (sm_MainStick.sLifes)
             {
                 case 6:
-                    s.drawHang(g);
+                    sm_MainStick.drawHang(g_bg);
                     break;
                 case 5:
-                    s.drawHang(g);
-                    s.drawHead(g);
+                    sm_MainStick.drawHang(g_bg);
+                    sm_MainStick.drawHead(g_bg);
                     break;
                 case 4:
-                    s.drawHang(g);
-                    s.drawHead(g);
-                    s.drawBody(g);
+                    sm_MainStick.drawHang(g_bg);
+                    sm_MainStick.drawHead(g_bg);
+                    sm_MainStick.drawBody(g_bg);
                     break;
                 case 3:
-                    s.drawHang(g);
-                    s.drawHead(g);
-                    s.drawBody(g);
-                    s.drawRightArm(g);
+                    sm_MainStick.drawHang(g_bg);
+                    sm_MainStick.drawHead(g_bg);
+                    sm_MainStick.drawBody(g_bg);
+                    sm_MainStick.drawRightArm(g_bg);
                     break;
                 case 2:
-                    s.drawHang(g);
-                    s.drawHead(g);
-                    s.drawBody(g);
-                    s.drawRightArm(g);
-                    s.drawLeftArm(g);
+                    sm_MainStick.drawHang(g_bg);
+                    sm_MainStick.drawHead(g_bg);
+                    sm_MainStick.drawBody(g_bg);
+                    sm_MainStick.drawRightArm(g_bg);
+                    sm_MainStick.drawLeftArm(g_bg);
                     break;
                 case 1:
-                    s.drawHang(g);
-                    s.drawHead(g);
-                    s.drawBody(g);
-                    s.drawRightArm(g);
-                    s.drawLeftArm(g);
-                    s.drawRightLeg(g);
+                    sm_MainStick.drawHang(g_bg);
+                    sm_MainStick.drawHead(g_bg);
+                    sm_MainStick.drawBody(g_bg);
+                    sm_MainStick.drawRightArm(g_bg);
+                    sm_MainStick.drawLeftArm(g_bg);
+                    sm_MainStick.drawRightLeg(g_bg);
                     break;
                 case 0:
-                    s.drawHang(g);
-                    s.drawHead(g);
-                    s.drawBody(g);
-                    s.drawRightArm(g);
-                    s.drawLeftArm(g);
-                    s.drawRightLeg(g);
-                    s.drawLeftLeg(g);
-                    defeat();
+                    sm_MainStick.drawHang(g_bg);
+                    sm_MainStick.drawHead(g_bg);
+                    sm_MainStick.drawBody(g_bg);
+                    sm_MainStick.drawRightArm(g_bg);
+                    sm_MainStick.drawLeftArm(g_bg);
+                    sm_MainStick.drawRightLeg(g_bg);
+                    sm_MainStick.drawLeftLeg(g_bg);
+                    gm_Defeat();
                     break;
             }
-
+            #endregion
         }
 
+        /// <summary>
+        /// check_Click Event Handler.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void check_Click(object sender, EventArgs e)
         {
             checkString();
-            backGround.Invalidate();
+            pb_BackGround.Invalidate();
         }
+        #endregion
 
+        //This region contains all the methods that handle the game management section of the program.
+        #region GameManagement
+
+        /// <summary>
+        /// Generates a random word.
+        /// </summary>
         private void genWord()
         {
             Random rand = new Random();
             wordComplexity = rand.Next(3, 9); //Il massimo è esclusivo, quindi i valori sono comunque da 3 a 8
         }
 
+        /// <summary>
+        /// Initializes the textboxes based on wordComplexity and makes them visible.
+        /// </summary>
         private void initText()
         {
-            word = new List<TextBox>();
+            l_words = new List<TextBox>(); //TextBoxes list
             for (int i = 0; i < wordComplexity; i++)
             {
-                word.Add(new TextBox());
-                word[i].Size = new Size(20, 20);
-                word[i].Location = new Point(1 + (i * 21), 120);
-                word[i].Visible = true;
-                word[i].MaxLength = 1;
-                this.Controls.Add(word[i]);
+                l_words.Add(new TextBox());
+                l_words[i].Size = new Size(20, 20);
+                l_words[i].Location = new Point(1 + (i * 21), 120);
+                l_words[i].Visible = true;
+                l_words[i].MaxLength = 1;
+                this.Controls.Add(l_words[i]);
             }
         }
 
-        private void defeat()
+        /// <summary>
+        /// Defeat method, called when you lose.
+        /// </summary>
+        private void gm_Defeat()
         {
             MessageBox.Show("Fai schifo");
-            reset();
+            gm_Reset();
         }
 
-        private void victory()
+        /// <summary>
+        /// Victory method, called when you win.
+        /// </summary>
+        private void gm_Victory()
         {
             MessageBox.Show("Brav");
-            reset();
+            gm_Reset();
         }
 
+        /// <summary>
+        /// Checks if the string is correct.
+        /// </summary>
         private void checkString()
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder(); //Creates a StringBuilder object.
 
             for (int i = 0; i < wordComplexity; i++)
             {
-                sb.Append(word[i].Text);
+                sb.Append(l_words[i].Text);
             }
-            if (sb.ToString().ToUpper().Equals(parola))
+            if (sb.ToString().ToUpper().Equals(wordToGuess))
             {
-                victory();
+                gm_Victory();
             }
             else
             {
-                s.lives--;
+                sm_MainStick.sLifes--;
             }
         }
 
-        private void reset()
+        /// <summary>
+        /// Resets everything.
+        /// </summary>
+        private void gm_Reset()
         {
-            foreach (TextBox words in word)
+            foreach (TextBox words in l_words)
             {
                 words.Dispose();
             };
+            //Disposes all the textboxes in the list.
             this.Invalidate();
-            backGround.Invalidate();
-            s.lives = 6;
-            genWord();
-            randString();
-            initText();
+            pb_BackGround.Invalidate();
+            sm_MainStick.sLifes = 6; //Resets the lifes.
+            genWord(); //Calls the method that generates a word.   
+            randString(); //Calls the method that selects a random string from the file.
+            initText(); 
             this.Invalidate();
-            backGround.Invalidate();
+            pb_BackGround.Invalidate();
         }
 
+        /// <summary>
+        /// Selects a random string from a text files.
+        /// </summary>
         private void randString()
         {
-            List<string> strings = new List<string>(); //è una lista operchè ho intenzione di fare altro in futuro...
-            Random random = new Random();
-            foreach(String parola_temp in LoadString.loadFile(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName.Insert(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName.Length, "//Stringhe.txt")))
-
+            List<string> l_Strings = new List<string>(); //è una lista operchè ho intenzione di fare altro in futuro...
+            Random rand = new Random();
+            foreach (String parola_temp in LoadString.loadFile(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName.Insert(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName.Length, "//Stringhe.txt")))
             {
                 if (parola_temp.Length == wordComplexity && !(parola_temp.Equals("File not found")))
                 {
-                    strings.Add(parola_temp);
-                    
+                    l_Strings.Add(parola_temp);
                 }
             }
-
-            if (random.Next(1, 3) == 1)
+            if (rand.Next(1, 3) == 1)
             {
-                parola = strings[0];
+                wordToGuess = l_Strings[0];
             }
             else
             {
-                parola = strings[1];
+                wordToGuess = l_Strings[1];
             }
         }
+        #endregion
     }
 }
