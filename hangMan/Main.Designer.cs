@@ -60,8 +60,9 @@
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.check);
             this.Controls.Add(this.backGround);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Main";
-            this.Text = "Main";
+            this.ShowIcon = false;
             this.Load += new System.EventHandler(this.Main_Load);
             ((System.ComponentModel.ISupportInitialize)(this.backGround)).EndInit();
             this.ResumeLayout(false);
