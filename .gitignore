@@ -9,9 +9,14 @@
 *.userosscache
 *.sln.docstates
 *.ide
-.vs/
-hangMan/bin/
-hangMan/obj/
+
+
+#dir
+/.vs/
+/hangMan/bin/
+/hangMan/obj/
+
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
