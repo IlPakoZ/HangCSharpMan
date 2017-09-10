@@ -19,8 +19,9 @@ namespace hangMan
         // Declaration ---------------------------------------------------------------------------------
         stickMan sm_MainStick; //Creates a new stickman! 
         int wordComplexity; //Indicates the complexity of the word, aka the number of its characters.
-        List<TextBox> l_words; //Creates a list containing textboxes.
+        int ltrPoints = 0; //Indicates how many letter you have guessed.
         String wordToGuess; //Word to guess.
+        List<Label> l_labels; //List of labels.
         // ---------------------------------------------------------------------------------------------
 
         /// <summary>
@@ -46,7 +47,7 @@ namespace hangMan
         /// <param name="e"></param>
         private void Main_Load(object sender, EventArgs e)
         {
-            initText(); //Initializes the  default textboxes.
+            initLabels();
         }
 
         /// <summary>
@@ -116,8 +117,29 @@ namespace hangMan
         /// <param name="e"></param>
         private void check_Click(object sender, EventArgs e)
         {
-            checkString();
+            checkString(); 
             pb_BackGround.Invalidate();
+        }
+
+        /// <summary>
+        /// ltr_Check_Click Event Handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ltr_Check_Click(object sender, EventArgs e)
+        {
+            checkLtrString();
+            pb_BackGround.Invalidate();
+        }
+
+        /// <summary>
+        /// resetButton_Click Event Handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            gm_Reset();
         }
         #endregion
 
@@ -130,24 +152,28 @@ namespace hangMan
         private void genWord()
         {
             Random rand = new Random();
-            wordComplexity = rand.Next(3, 9); //Il massimo è esclusivo, quindi i valori sono comunque da 3 a 8
+            wordComplexity = rand.Next(3, 9); //Il massimo è esclusivo, quindi i valori sono comunque da 3 a 8 
+
         }
 
         /// <summary>
-        /// Initializes the textboxes based on wordComplexity and makes them visible.
+        /// Initializes the list of labels based on the word complexity.
         /// </summary>
-        private void initText()
+        private void initLabels()
         {
-            l_words = new List<TextBox>(); //TextBoxes list
+            int j;
+            l_labels = new List<Label>(); //Labels list
             for (int i = 0; i < wordComplexity; i++)
             {
-                l_words.Add(new TextBox());
-                l_words[i].Size = new Size(20, 20);
-                l_words[i].Location = new Point(1 + (i * 21), 120);
-                l_words[i].Visible = true;
-                l_words[i].MaxLength = 1;
-                this.Controls.Add(l_words[i]);
+                l_labels.Add(new Label());
+                l_labels[i].Size = new Size(20, 20);
+                l_labels[i].Location = new Point(12 + (i * 20), 90);
+                l_labels[i].Visible = true;
+                l_labels[i].Text = "_";
+                this.Controls.Add(l_labels[i]);
             }
+            j = new Random().Next(0, wordComplexity); //+1 cause the max value is esclusive 
+            l_labels[j].Text = wordToGuess[j].ToString();
         }
 
         /// <summary>
@@ -169,18 +195,17 @@ namespace hangMan
         }
 
         /// <summary>
-        /// Checks if the string is correct.
+        /// Check if the string is correct (for the entire word).
         /// </summary>
         private void checkString()
         {
-            StringBuilder sb = new StringBuilder(); //Creates a StringBuilder object.
-
-            for (int i = 0; i < wordComplexity; i++)
+            if (l_word.Text.ToUpper().Equals(wordToGuess))
             {
-                sb.Append(l_words[i].Text);
-            }
-            if (sb.ToString().ToUpper().Equals(wordToGuess))
-            {
+                for (int i = 0; i < wordComplexity; i++)
+                {
+                    l_labels[i].Text = wordToGuess[i].ToString();
+                    l_labels[i].Invalidate();
+                }
                 gm_Victory();
             }
             else
@@ -190,13 +215,21 @@ namespace hangMan
         }
 
         /// <summary>
+        /// Checks if the string is correct (for the single char).
+        /// </summary>
+        private void checkLtrString()
+        {
+            
+        }
+
+        /// <summary>
         /// Resets everything.
         /// </summary>
         private void gm_Reset()
         {
-            foreach (TextBox words in l_words)
+            foreach (Label label in l_labels)
             {
-                words.Dispose();
+                label.Dispose();
             };
             //Disposes all the textboxes in the list.
             this.Invalidate();
@@ -204,7 +237,8 @@ namespace hangMan
             sm_MainStick.sLifes = 6; //Resets the lifes.
             genWord(); //Calls the method that generates a word.   
             randString(); //Calls the method that selects a random string from the file.
-            initText(); 
+            initLabels();
+            ltrPoints = 0;
             this.Invalidate();
             pb_BackGround.Invalidate();
         }
@@ -232,6 +266,8 @@ namespace hangMan
                 wordToGuess = l_Strings[1];
             }
         }
+
         #endregion
+       
     }
 }
