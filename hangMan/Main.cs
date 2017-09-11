@@ -24,7 +24,7 @@ namespace hangMan
         int ltrPoints = 0; //Indicates how many letter you have guessed.
         String wordToGuess; //Word to guess.
         List<Label> l_labels; //List of labels.
-        Thread music; //Separate thread for music.
+        SoundPlayer player;
         // ---------------------------------------------------------------------------------------------
 
         /// <summary>
@@ -50,8 +50,6 @@ namespace hangMan
         private void Main_Load(object sender, EventArgs e)
         {
             initLabels();
-            music = new Thread(Musica);
-            music.Start();
         }
 
         /// <summary>
@@ -344,11 +342,28 @@ namespace hangMan
         /// </summary>
         private void Musica()
         {
-            SoundPlayer player = new SoundPlayer(hangMan.Properties.Resources.Space_IlPakoz);
+            player = new SoundPlayer(hangMan.Properties.Resources.Space_IlPakoz);
             player.PlayLooping();
         }
 
+
         #endregion
-       
+
+        private void musicCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox box = (CheckBox)sender;
+            if (box.Checked)
+            {
+                Musica();
+                box.Image = hangMan.Properties.Resources.stateOn;
+                box.Invalidate();
+            }
+            else
+            {
+                player.Stop();
+                box.Image = hangMan.Properties.Resources.stateOff;
+                box.Invalidate();
+            }
+        }
     }
 }

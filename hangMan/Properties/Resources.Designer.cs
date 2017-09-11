@@ -68,5 +68,25 @@ namespace hangMan.Properties {
                 return ResourceManager.GetStream("Space_IlPakoz", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap stateOff {
+            get {
+                object obj = ResourceManager.GetObject("stateOff", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap stateOn {
+            get {
+                object obj = ResourceManager.GetObject("stateOn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

@@ -36,6 +36,7 @@
             this.s_word = new System.Windows.Forms.TextBox();
             this.ltr_Check = new System.Windows.Forms.Button();
             this.resetButton = new System.Windows.Forms.Button();
+            this.musicCheck = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pb_BackGround)).BeginInit();
             this.SuspendLayout();
             // 
@@ -112,11 +113,26 @@
             this.resetButton.UseVisualStyleBackColor = true;
             this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
             // 
+            // musicCheck
+            // 
+            this.musicCheck.Appearance = System.Windows.Forms.Appearance.Button;
+            this.musicCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.musicCheck.Image = global::hangMan.Properties.Resources.stateOff;
+            this.musicCheck.Location = new System.Drawing.Point(47, 12);
+            this.musicCheck.Name = "musicCheck";
+            this.musicCheck.Size = new System.Drawing.Size(75, 25);
+            this.musicCheck.TabIndex = 8;
+            this.musicCheck.Text = "Musica";
+            this.musicCheck.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.musicCheck.UseVisualStyleBackColor = true;
+            this.musicCheck.CheckedChanged += new System.EventHandler(this.musicCheck_CheckedChanged);
+            // 
             // frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.musicCheck);
             this.Controls.Add(this.resetButton);
             this.Controls.Add(this.ltr_Check);
             this.Controls.Add(this.s_word);
@@ -128,6 +144,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frm_Main";
             this.ShowIcon = false;
+            this.Text = "HangMan Poor Version";
             this.Load += new System.EventHandler(this.Main_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pb_BackGround)).EndInit();
             this.ResumeLayout(false);
@@ -145,5 +162,6 @@
         private System.Windows.Forms.TextBox s_word;
         private System.Windows.Forms.Button ltr_Check;
         private System.Windows.Forms.Button resetButton;
+        private System.Windows.Forms.CheckBox musicCheck;
     }
 }
