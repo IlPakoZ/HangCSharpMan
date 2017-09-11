@@ -5,7 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -22,7 +24,7 @@ namespace hangMan
         int ltrPoints = 0; //Indicates how many letter you have guessed.
         String wordToGuess; //Word to guess.
         List<Label> l_labels; //List of labels.
-
+        Thread music; //Separate thread for music.
         // ---------------------------------------------------------------------------------------------
 
         /// <summary>
@@ -32,7 +34,6 @@ namespace hangMan
         {
             InitializeComponent();
             sm_MainStick = new stickMan(6); //initiate stickMan instance with 6 lives
-                                 //This type of instantiation is quite useless, the stickman can have only 6 lives, passing them by parameter has no sense.
             genWord(); //Calls the method that generates a word.   
             randString(); //Calls the method that selects a random string from the file.
         }
@@ -49,6 +50,8 @@ namespace hangMan
         private void Main_Load(object sender, EventArgs e)
         {
             initLabels();
+            music = new Thread(Musica);
+            music.Start();
         }
 
         /// <summary>
@@ -334,6 +337,15 @@ namespace hangMan
             {
                 wordToGuess = l_Strings[1];
             }
+        }
+
+        /// <summary>
+        /// An endless loop of music.
+        /// </summary>
+        private void Musica()
+        {
+            SoundPlayer player = new SoundPlayer(hangMan.Properties.Resources.Space_IlPakoz);
+            player.PlayLooping();
         }
 
         #endregion

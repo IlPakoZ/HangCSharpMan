@@ -59,5 +59,14 @@ namespace hangMan.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.IO.UnmanagedMemoryStream simile a System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Space_IlPakoz {
+            get {
+                return ResourceManager.GetStream("Space_IlPakoz", resourceCulture);
+            }
+        }
     }
 }

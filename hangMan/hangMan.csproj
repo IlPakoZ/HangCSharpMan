@@ -87,5 +87,11 @@
   <ItemGroup>
     <None Include="Resources\stateOn.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Space_IlPakoz.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Space_IlPakoz.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
