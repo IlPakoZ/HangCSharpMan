@@ -143,6 +143,28 @@ namespace hangMan
         {
             gm_Reset();
         }
+
+        /// <summary>
+        /// musicCheck_CheckedChanged Event Handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void musicCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox box = (CheckBox)sender;
+            if (box.Checked)
+            {
+                Musica();
+                box.Image = hangMan.Properties.Resources.stateOn;
+                box.Invalidate();
+            }
+            else
+            {
+                player.Stop();
+                box.Image = hangMan.Properties.Resources.stateOff;
+                box.Invalidate();
+            }
+        }
         #endregion
 
         //This region contains all the methods that handle the game management section of the program.
@@ -349,21 +371,6 @@ namespace hangMan
 
         #endregion
 
-        private void musicCheck_CheckedChanged(object sender, EventArgs e)
-        {
-            CheckBox box = (CheckBox)sender;
-            if (box.Checked)
-            {
-                Musica();
-                box.Image = hangMan.Properties.Resources.stateOn;
-                box.Invalidate();
-            }
-            else
-            {
-                player.Stop();
-                box.Image = hangMan.Properties.Resources.stateOff;
-                box.Invalidate();
-            }
-        }
+        
     }
 }
