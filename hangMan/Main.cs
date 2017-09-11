@@ -25,6 +25,7 @@ namespace hangMan
         String wordToGuess; //Word to guess.
         List<Label> l_labels; //List of labels.
         SoundPlayer player;
+        List<char> l_insertedChars; //All inserted chars
         // ---------------------------------------------------------------------------------------------
 
         /// <summary>
@@ -197,6 +198,20 @@ namespace hangMan
             }
             j = new Random().Next(0, wordComplexity); //+1 cause the max value is esclusive 
             l_labels[j].Text = wordToGuess[j].ToString();
+            l_insertedChars = new List<char>();
+            //If it's the only letter in the word, add the letter in the list.
+            int count = 0;
+            for (int i = 0; i < wordToGuess.Length; i++)
+            {
+                if (wordToGuess[i] == wordToGuess[j])
+                {
+                    count++;
+                }
+            }
+            if (count == 1)
+            {
+                l_insertedChars.Add(wordToGuess[j]);
+            }
         }
 
         /// <summary>
@@ -242,76 +257,43 @@ namespace hangMan
         /// </summary>
         private void checkLtrString()
         {
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < wordComplexity; i++)
-            {
-                sb.Append(l_labels[i].Text); //prior to user input
-            }
+            char x = s_word.Text[0];
+            bool alreadyInserted = false;
+            bool guessed = false;
 
-            int _count = 0, pos = 0, count1 = 0, count2 = 0;
-            bool flag = false;
-            for (int i = 0; i < wordComplexity; i++)
+            for (int i = 0; i < l_insertedChars.Count(); i++)
             {
-                if (sb[i].ToString().Equals(s_word.Text.ToUpper()))
+                if (x == l_insertedChars[i])
                 {
-                    _count++;
-                    pos = i; // posizione del suggerimento (Lo so che verrà cambiato se ci sono piu lettere, ma chissenefrega)
+                    alreadyInserted = true;
+                    break;
                 }
             }
-
-            if (_count < 1) // mai inserito
+            if (!alreadyInserted)
             {
-                flag = true;
-                for (int i = 0; i < wordComplexity; i++)
+                l_insertedChars.Add(x);
+                for (int j = 0; j < wordToGuess.Length; j++)
                 {
-                    if (s_word.Text.ToUpper().Equals(wordToGuess[i].ToString()))
+                    if (x == wordToGuess[j])
                     {
-                        l_labels[i].Text = wordToGuess[i].ToString();
-                        l_labels[i].Invalidate();
-                        count2++;
+                        l_labels[j].Text = x.ToString().ToUpper();
+                        guessed = true;
                     }
                 }
             }
-            else if(_count == 1) // suggerimento iniziale
-            {
-                for (int i = pos + 1; i < wordComplexity; i++)
-                {
-                    if (s_word.Text.ToUpper().Equals(wordToGuess[i].ToString()))
-                    {
-                        l_labels[i].Text = wordToGuess[i].ToString();
-                        l_labels[i].Invalidate();
-                        count1++; //conta se ci sono stati altri caratteri
-                    }
-                }
-                if (count1 == 0) //c'era solo il sugg iniziale
-                {
-                    sm_MainStick.sLifes--;
-                }
-            }
-            else // carattere già inserito
+            if (!guessed)
             {
                 sm_MainStick.sLifes--;
             }
-
-            if (count2 == 0 && flag)
+            String word = null;
+            for(int i = 0; i < l_labels.Count; i++)
             {
-                sm_MainStick.sLifes--;
+                word += l_labels[i].Text;
             }
-
-
-            sb.Clear();
-
-            for (int i = 0; i < wordComplexity; i++)
-            {
-                sb.Append(l_labels[i].Text); //post user input
-            }
-            if (sb.ToString().Equals(wordToGuess))
+            if (word.ToLower() == wordToGuess.ToLower())
             {
                 gm_Victory();
             }
-
-
-
         }
 
         /// <summary>
